@@ -1,0 +1,32 @@
+# Security - Sensitive Data Files
+passwords.txt
+passwords.enc
+secret.key
+*.key
+*.pem
+*.crt
+
+# Virtual Environments
+.venv/
+venv/
+ENV/
+env/
+
+# Python Cache & Bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# IDE / Editor Settings
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Temporary & Build Files
+tempCodeRunnerFile.py
+.$home-2.png.bkp
+build/
+dist/
+*.egg-info/

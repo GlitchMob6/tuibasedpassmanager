@@ -1,0 +1,45 @@
+Screen {
+    align: center middle;
+    padding: 1 2;
+}
+
+#title {
+    content-align: center middle;
+    text-style: bold;
+    color: $accent;
+    margin-bottom: 1;
+}
+
+#subtitle {
+    content-align: center middle;
+    color: $text-muted;
+    margin-bottom: 1;
+}
+
+Input {
+    margin: 1 0;
+    width: 60;
+}
+
+Button {
+    margin: 1 0;
+    width: 30;
+}
+
+Static {
+    margin: 1 0;
+}
+
+Static#status {
+    margin-top: 1;
+    color: $warning;
+    text-align: center;
+}
+
+#password_output {
+    padding: 1 2;
+    border: solid $success;
+    color: $success;
+    text-style: bold;
+    margin: 1 0;
+}
