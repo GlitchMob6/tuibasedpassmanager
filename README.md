@@ -1,37 +1,87 @@
-# SecurePass - Encrypted TUI Password Manager
+# SecurePass — Encrypted TUI Password Manager
 
-A modern, secure Terminal User Interface (TUI) Password Manager built with **Python**, **Textual**, and **Cryptography** (PBKDF2HMAC + Fernet AES Encryption).
+**A terminal-based password manager with an encrypted local vault.**
+
+SecurePass is a Python **Textual** application that stores credentials in an encrypted vault protected by a master password. It also adds a second verification layer using security questions before sensitive entries can be viewed or managed.
 
 ## Features
 
-- 🔐 **Encrypted Vault Storage**: All passwords, security questions, and credentials are encrypted on disk (`passwords.enc`) using a key derived from your **Master Password** via `PBKDF2HMAC` (SHA-256, 100,000 iterations).
-- 🔑 **Master Password Protection**: Protects the vault at launch. Includes screen locking capability.
-- 🛡️ **Two-Factor Security Q&A**: Secondary authentication requiring user answers to dual security questions before viewing, editing, or deleting entries.
-- 🚚 **Automatic Legacy Import**: Detects legacy unencrypted `passwords.txt` files and automatically migrates entries into your encrypted vault on first setup.
-- 🎨 **Modern Textual TUI**: Responsive layout with clean styles (`style.tcss`).
+- 🔐 **Encrypted vault storage** using Fernet encryption
+- 🔑 **Master password protection** for the vault
+- 🛡️ **Security-question verification** before sensitive entry access
+- 🔒 **Vault locking** from the application
+- 🚚 **Legacy import** for existing unencrypted `passwords.txt` data
+- 🖥️ **Terminal UI** built with Textual
+- ✏️ Add, view, edit, and delete stored credentials
+
+## Security model
+
+The project uses **PBKDF2HMAC with SHA-256** to derive key material from the master password and **Fernet** for authenticated symmetric encryption.
+
+Conceptually:
+
+```text
+Master Password
+      │
+      ▼
+ PBKDF2HMAC
+      │
+      ▼
+Derived encryption key
+      │
+      ▼
+ Fernet
+      │
+      ▼
+Encrypted local vault
+```
+
+The application keeps the decrypted vault available only while the vault is unlocked; locking clears the active Fernet/data state.
+
+> This is an educational/local password-manager project. Do not treat it as a production-grade password manager without independently auditing the implementation and threat model.
 
 ## Requirements
 
 - Python 3.10+
-- `textual`
-- `cryptography`
+- Textual
+- Cryptography
 
-## Installation & Running
+Install dependencies:
 
-1. Install dependencies:
-   ```bash
-   pip install textual cryptography
-   ```
+```bash
+pip install -r requirements.txt
+```
 
-2. Run the application:
-   ```bash
-   python main.py
-   ```
+## Running
 
-## Usage Flow
+```bash
+python main.py
+```
 
-1. **First Launch**: Set up your Master Password to initialize the encrypted vault.
-2. **Add Entry**: Click **Add Password** to store a new entity, password, and security questions.
-3. **View Entry**: Click **View Password**, enter the entity name, and answer the security questions to reveal the password.
-4. **Manage Entry**: Edit existing passwords or delete entities securely.
-5. **Lock Vault**: Click **Lock Vault** at any time to return to the lock screen.
+## Usage flow
+
+1. Launch SecurePass.
+2. Create a master password on first use.
+3. Unlock the vault on subsequent launches.
+4. Add credentials to the encrypted vault.
+5. Verify the security questions before accessing protected entries.
+6. Lock the vault when finished.
+
+## Project structure
+
+```text
+tuibasedpassmanager/
+├── main.py
+├── vault_manager.py
+├── style.tcss
+├── requirements.txt
+└── README.md
+```
+
+## Status
+
+✅ **Complete / functional project**
+
+## License
+
+The repository contains a license file. Check the repository's license metadata for the exact terms.
